@@ -1,24 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import ListadoNoticias from './componentes/ListadoNoticias';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Noticia from './componentes/Noticia';
+import BarraNavegacion from './componentes/BarraNavegacion';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <BarraNavegacion mb="50"/>
+    <BrowserRouter mt="4">
+      <Routes>
+        <Route path="/" element={<ListadoNoticias />} />
+        <Route path="/noticias/:id" element={<Noticia />} />
+      </Routes>
+    </BrowserRouter>
+    </>
   );
 }
 
