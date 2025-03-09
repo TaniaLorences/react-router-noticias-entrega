@@ -4,33 +4,33 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 
-function Noticia(){
+function Noticia() {
 
-    const params = useParams();
-    const id = params.id;
+  const params = useParams();
+  const id = parseInt(params.id);   // OJO: Parseo de params
 
-    const[noticia, setNoticia]=useState(null)
+  const [noticia, setNoticia] = useState(null)
 
-    const cargarNoticia = async () => {
-        try {
-            const response = await fetch("/noticias.json");
-            const data = await response.json();
-            setNoticia(data[id])
-        } catch (error) {
-            console.log("Error al cargar la noticia", error)
-        }
+  const cargarNoticia = async () => {
+    try {
+      const response = await fetch("/noticias.json");
+      const data = await response.json();
+      setNoticia(data[id])
+    } catch (error) {
+      console.log("Error al cargar la noticia", error)
     }
+  }
 
-    useEffect(() => {
-        cargarNoticia();
-    }, [id])
+  useEffect(() => {
+    cargarNoticia();
+  }, [id])
 
-    if (!noticia){
-        return <h2>Cargando noticia...</h2> // Trampa para darle tiempo a cargar y que no me dé error. Sin esta línea, no funciona.
-    }
+  if (!noticia) {
+    return <h2>Cargando noticia...</h2> // Trampa para darle tiempo a cargar y que no me dé error. Sin esta línea, no funciona.
+  }
 
-    return(
-        <Card>
+  return (
+    <Card>
       <Card.Body>
         <Card.Title>{noticia.titulo}</Card.Title>
 
@@ -46,7 +46,7 @@ function Noticia(){
       </Card.Body>
     </Card>
 
-    )
+  )
 }
 
 export default Noticia;
